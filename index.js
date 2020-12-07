@@ -7,12 +7,12 @@ const ones = tf.ones([1,1]);
 const xs = tf.tensor1d([5.1, 4.7, 6.4, 7.0]);
 const ys = tf.tensor1d([1, 1, 0, 0]);
 
-// xi=>1/(1+Math.exp(-(P[0]+(P[1]*xi))))
-const f = x => ones.div(ones.sum(((w0.sum(w1.mul(x))).neg).exp))
+const f = x => ones.div(ones.add(((w0.add(w1.mul(x))).neg()).exp()))
+
+console.log(f(xs).dataSync())
 
 const loss = (pred, label) => tf.mean(tf.square(tf.sub(pred, label)));
 
-console.log(f(xs))
 const optimizer = tf.train.sgd(0.01);
 
 // Train the model.
