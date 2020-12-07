@@ -9,15 +9,13 @@ const ys = tf.tensor1d([1, 1, 0, 0]);
 
 const f = x => ones.div(ones.add(((w0.add(w1.mul(x))).neg()).exp()))
 
-console.log(f(xs).dataSync())
-
 const loss = (pred, label) => tf.mean(tf.square(tf.sub(pred, label)));
 
 const optimizer = tf.train.sgd(0.01);
 
 // Train the model.
-for (let i = 0; i < 10; i++) {
-   optimizer.minimize(() => loss(f(xs), ys));
+for (let i = 0; i < 100; i++) {
+  optimizer.minimize(() => loss(f(xs), ys));
 }
 
 // Make predictions.
